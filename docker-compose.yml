@@ -1,0 +1,19 @@
+volumes:
+  gemini-config:
+
+services:
+  gemini:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gemini-cli
+    stdin_open: true
+    tty: true
+    working_dir: /app/src/gemini.ws
+    command: /bin/bash
+    volumes:
+      - ./src:/app/src
+      - gemini-config:/root/.config/gemini
+      - /Users/peterhansen/Dropbox/gemini-ws:/app/src/gemini-ws
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
